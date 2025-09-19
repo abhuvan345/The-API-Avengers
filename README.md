@@ -28,8 +28,8 @@ It is designed to be **farmer-friendly, scalable, and bilingual (English & Hindi
 - Smart crop recommendations (soil, rainfall, and demand-based)  
 - Expected yield & market value prediction  
 - Rainfall forecasting with climate fit  
-- Risk factor (Low/Medium/High)  
-- Multi-language support (English & Hindi)  
+- Risk factor
+- Multi-language support (English, Kannada & Hindi)  
 - Simple and mobile-friendly UI  
 
 ---
@@ -39,7 +39,7 @@ It is designed to be **farmer-friendly, scalable, and bilingual (English & Hindi
 - **Backend:** Flask (Python APIs), Node.js + Express.js  
 - **ML Models:** Scikit-learn, Prophet, LightGBM, TensorFlow  
 - **Database:** SQLite  
-- **APIs:** OpenWeatherMap, EmailJS, Hugging Face  
+- **APIs:** OpenWeatherMap, Hugging Face  
 
 ---
 
