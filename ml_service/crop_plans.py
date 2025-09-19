@@ -711,6 +711,16 @@ def get_crop_plan(crop_name: str, soil_type: str = None, weather_data: Dict = No
     customized_plan["generated_date"] = datetime.datetime.now().isoformat()
     customized_plan["crop_category"] = categorize_crop(crop_name)
     
+    # Add growing period info from current month to harvest month
+    if "duration_days" in customized_plan:
+        duration_days = customized_plan["duration_days"]
+        current_date = datetime.datetime.now()
+        harvest_date = current_date + datetime.timedelta(days=duration_days)
+        
+        customized_plan["growing_period_months"] = f"{current_date.strftime('%B %Y')} to {harvest_date.strftime('%B %Y')}"
+        customized_plan["estimated_harvest_month"] = harvest_date.strftime('%B %Y')
+        customized_plan["estimated_months_to_harvest"] = duration_days // 30
+    
     return customized_plan
 
 def categorize_crop(crop_name: str) -> str:

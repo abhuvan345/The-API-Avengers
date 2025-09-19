@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   ArrowLeft,
-  Calendar,
   Clock,
   Droplets,
   Leaf,
@@ -14,6 +13,7 @@ import {
   MapPin,
   Beaker,
 } from "lucide-react";
+import GrowingStagesTimeline from "./GrowingStagesTimeline";
 
 interface CropPlanPageProps {
   selectedCrop: {
@@ -49,6 +49,9 @@ interface CropPlan {
   scale_tips?: string[];
   generated_date?: string;
   crop_category?: string;
+  growing_period_months?: string;
+  estimated_harvest_month?: string;
+  estimated_months_to_harvest?: number;
 }
 
 const CropPlanPage: React.FC<CropPlanPageProps> = ({
@@ -143,24 +146,6 @@ const CropPlanPage: React.FC<CropPlanPageProps> = ({
     if (days < 30) return `${days} days`;
     if (days < 365) return `${Math.round(days / 30)} months`;
     return `${Math.round(days / 365)} years`;
-  };
-
-  const getMonthName = (monthNumber: number): string => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    return months[monthNumber - 1] || "Unknown";
   };
 
   // Check if no crop is selected
@@ -284,35 +269,24 @@ const CropPlanPage: React.FC<CropPlanPageProps> = ({
 
           <div className="p-8">
             {/* Key Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 text-center">
-                <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-                <h3 className="text-lg font-bold text-blue-800 mb-2">
-                  Best Planting
-                </h3>
-                <p className="text-blue-600 font-semibold text-sm">
-                  {cropPlan.best_planting_months
-                    .map((month) => getMonthName(month))
-                    .join(", ")}
-                </p>
-                {cropPlan.recommended_planting_date && (
-                  <p className="text-blue-500 text-xs mt-1">
-                    Next: {cropPlan.recommended_planting_date}
-                  </p>
-                )}
-              </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 text-center">
                 <Clock className="w-8 h-8 text-green-600 mx-auto mb-3" />
                 <h3 className="text-lg font-bold text-green-800 mb-2">
                   Duration
                 </h3>
                 <p className="text-green-600 font-semibold">
-                  {formatDuration(cropPlan.duration_days)}
+                  {cropPlan.growing_period_months ||
+                    formatDuration(cropPlan.duration_days)}
                 </p>
                 <p className="text-green-500 text-xs">
                   ({cropPlan.duration_days} days)
                 </p>
+                {cropPlan.estimated_harvest_month && (
+                  <p className="text-green-500 text-xs mt-1">
+                    Harvest: {cropPlan.estimated_harvest_month}
+                  </p>
+                )}
               </div>
 
               <div className="bg-cyan-50 border-2 border-cyan-200 rounded-xl p-6 text-center">
@@ -363,35 +337,16 @@ const CropPlanPage: React.FC<CropPlanPageProps> = ({
               </div>
             </div>
 
-            {/* Growing Stages */}
+            {/* Growing Stages Timeline */}
             <div className="bg-gray-50 rounded-2xl p-8 mb-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                 <Target className="w-8 h-8 mr-3 text-green-600" />
-                Growing Stages Timeline
+                {selectedCrop
+                  ? `${selectedCrop.name} Growing Stages Timeline`
+                  : "Growing Stages Timeline"}
               </h3>
 
-              <div className="space-y-4">
-                {cropPlan.stages.map((stage, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">
-                        {index + 1}
-                      </div>
-                    </div>
-                    <div className="flex-grow bg-white rounded-xl p-4 shadow-sm">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                        <h4 className="text-xl font-bold text-gray-800">
-                          {stage.stage}
-                        </h4>
-                        <span className="text-green-600 font-semibold text-sm bg-green-100 px-3 py-1 rounded-full">
-                          {formatDuration(stage.duration_days)}
-                        </span>
-                      </div>
-                      <p className="text-gray-600">{stage.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <GrowingStagesTimeline cropName={selectedCrop?.name || ""} />
             </div>
 
             {/* Success Tips */}

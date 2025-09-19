@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ArrowLeft,
   MapPin,
@@ -29,6 +29,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
   const [isLoadingWeather, setIsLoadingWeather] = useState<boolean>(false);
   const [weatherError, setWeatherError] = useState<string>("");
   const [weatherData, setWeatherData] = useState<any>(null);
+  const weatherDebounceTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Comprehensive soil types with descriptions
   const soilTypes = [
@@ -129,41 +130,60 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
       setShowSuggestions(false);
     }
 
+    // Wait for debounce before fetching weather to avoid rapid requests
+    const debounceMs = 500;
+    clearTimeout(weatherDebounceTimer.current);
+
     // Fetch weather data if location is long enough
     if (location.trim().length > 2) {
       setIsLoadingWeather(true);
       setWeatherError("");
 
-      try {
-        const response = await fetch(
-          `http://localhost:5002/weather?location=${encodeURIComponent(
-            location.trim()
-          )}`
-        );
-        const data = await response.json();
+      // Use a debounce to avoid too many requests while typing
+      weatherDebounceTimer.current = setTimeout(async () => {
+        console.log("Fetching weather data for location:", location.trim());
 
-        if (data.error) {
-          setWeatherError(data.error);
-          setWeatherData(null);
-        } else {
-          setWeatherData(data);
-          setFormData((prev) => ({
-            ...prev,
-            climate: `${data.temperature}°C, ${data.humidity}% humidity`,
-          }));
-          setShowSuggestions(false); // Hide suggestions when successful
+        try {
+          const url = `http://localhost:5002/weather?location=${encodeURIComponent(
+            location.trim()
+          )}`;
+          console.log("Calling weather API URL:", url);
+
+          const response = await fetch(url);
+          console.log("Weather API response status:", response.status);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Weather API response data:", data);
+
+          if (data.error) {
+            console.error("Weather API returned error:", data.error);
+            setWeatherError(data.error);
+            setWeatherData(null);
+          } else {
+            console.log("Weather data successfully received");
+            setWeatherData(data);
+            setFormData((prev) => ({
+              ...prev,
+              climate: `${data.temperature}°C, ${data.humidity}% humidity`,
+            }));
+            setShowSuggestions(false); // Hide suggestions when successful
+          }
+        } catch (error) {
+          console.error("Weather fetch error:", error);
+          setWeatherError(
+            "Failed to connect to weather service. Please check your internet connection and try again."
+          );
+        } finally {
+          setIsLoadingWeather(false);
         }
-      } catch (error) {
-        console.error("Weather fetch error:", error);
-        setWeatherError(
-          "Failed to connect to weather service. Please check your internet connection and try again."
-        );
-        setWeatherData(null);
-      } finally {
-        setIsLoadingWeather(false);
-      }
+      }, debounceMs);
     } else {
       // Clear weather data for short inputs
+      setIsLoadingWeather(false);
       setWeatherData(null);
       setWeatherError("");
     }
