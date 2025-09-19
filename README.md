@@ -19,7 +19,6 @@ It is designed to be **farmer-friendly, scalable, and bilingual (English & Hindi
 
 ## 🌐 APIs Used  
 - **OpenWeather API** → [https://openweathermap.org/api](https://openweathermap.org/api)  
-- **EmailJS** → [https://www.emailjs.com/](https://www.emailjs.com/)  
 - **Hugging Face (Translation)** → [Helsinki-NLP/opus-mt-en-hi](https://huggingface.co/Helsinki-NLP/opus-mt-en-hi)  
 
 ---
