@@ -12,20 +12,20 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
 
   const teamMembers = [
     {
-      name: t("landing.teamMembers.Bhuvan A"),
-      role: t("landing.teamRoles.ML Engineer"),
+      name: t("Bhuvan A"),
+      role: t("ML Engineer"),
     },
     {
-      name: t("landing.teamMembers.Akshay S"),
-      role: t("landing.teamRoles.Backend Developer"),
+      name: t("Akshay S"),
+      role: t("Backend Developer"),
     },
     {
-      name: t("landing.teamMembers.Sachin C"),
-      role: t("landing.teamRoles.Frontend Developer"),
+      name: t("Sachin C"),
+      role: t("Frontend Developer"),
     },
     {
-      name: t("landing.teamMembers.Abhay K R"),
-      role: t("landing.teamRoles.Data Engineer"),
+      name: t("Abhay K R"),
+      role: t("Data Engineer"),
     },
   ];
 
