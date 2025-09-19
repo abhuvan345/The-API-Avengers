@@ -9,6 +9,8 @@ import {
   Loader,
 } from "lucide-react";
 import type { FarmData } from "../App";
+import { useLanguage } from "../hooks/useLanguage";
+import LanguageDropdown from "./LanguageDropdown";
 
 interface FarmDetailsPageProps {
   onNext: (data: FarmData) => void;
@@ -19,6 +21,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
   onNext,
   onBack,
 }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FarmData>({
     soilType: "",
     soilImage: null,
@@ -29,58 +32,58 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
   const [isLoadingWeather, setIsLoadingWeather] = useState<boolean>(false);
   const [weatherError, setWeatherError] = useState<string>("");
   const [weatherData, setWeatherData] = useState<any>(null);
-  const weatherDebounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const weatherDebounceTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
 
   // Comprehensive soil types with descriptions
   const soilTypes = [
     {
-      name: "Sandy",
+      name: t("farmDetails.soilTypes.sandy.name"),
       value: "sandy",
-      description: "Well-draining, quick to warm up, low water retention",
+      description: t("farmDetails.soilTypes.sandy.description"),
       color: "bg-yellow-100 border-yellow-300",
     },
     {
-      name: "Clay",
+      name: t("farmDetails.soilTypes.clay.name"),
       value: "clay",
-      description: "Heavy, nutrient-rich, slow drainage, retains water well",
+      description: t("farmDetails.soilTypes.clay.description"),
       color: "bg-red-100 border-red-300",
     },
     {
-      name: "Loamy",
+      name: t("farmDetails.soilTypes.loamy.name"),
       value: "loamy",
-      description:
-        "Ideal balance of sand, silt, and clay - excellent for crops",
+      description: t("farmDetails.soilTypes.loamy.description"),
       color: "bg-green-100 border-green-300",
     },
     {
-      name: "Silty",
+      name: t("farmDetails.soilTypes.silty.name"),
       value: "silty",
-      description:
-        "Fine particles, fertile, retains moisture, can be compacted",
+      description: t("farmDetails.soilTypes.silty.description"),
       color: "bg-blue-100 border-blue-300",
     },
     {
-      name: "Peaty",
+      name: t("farmDetails.soilTypes.peaty.name"),
       value: "peaty",
-      description: "High organic matter, acidic, excellent water retention",
+      description: t("farmDetails.soilTypes.peaty.description"),
       color: "bg-purple-100 border-purple-300",
     },
     {
-      name: "Chalky",
+      name: t("farmDetails.soilTypes.chalky.name"),
       value: "chalky",
-      description: "Alkaline, stony, free-draining, may lack nutrients",
+      description: t("farmDetails.soilTypes.chalky.description"),
       color: "bg-gray-100 border-gray-300",
     },
     {
-      name: "Saline",
+      name: t("farmDetails.soilTypes.saline.name"),
       value: "saline",
-      description: "High salt content, challenging for most crops",
+      description: t("farmDetails.soilTypes.saline.description"),
       color: "bg-orange-100 border-orange-300",
     },
     {
-      name: "Black Cotton",
+      name: t("farmDetails.soilTypes.black_cotton.name"),
       value: "black_cotton",
-      description: "Rich in clay, swells when wet, cracks when dry",
+      description: t("farmDetails.soilTypes.black_cotton.description"),
       color: "bg-slate-100 border-slate-300",
     },
   ];
@@ -111,6 +114,17 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
     "Rajkot",
     "Surat",
     "Vadodara",
+    "Tumukur",
+    "Mysore",
+    "Mandagadya",
+    "Belgaum",
+    "Hubli",
+    "Theertalli",
+    "Dharwad",
+    "Shimoga",
+    "Udupi",
+    "Manipal",
+
   ];
 
   const [locationSuggestions, setLocationSuggestions] = useState<string[]>([]);
@@ -132,7 +146,9 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
 
     // Wait for debounce before fetching weather to avoid rapid requests
     const debounceMs = 500;
-    clearTimeout(weatherDebounceTimer.current);
+    if (weatherDebounceTimer.current) {
+      clearTimeout(weatherDebounceTimer.current);
+    }
 
     // Fetch weather data if location is long enough
     if (location.trim().length > 2) {
@@ -200,35 +216,30 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
       onNext(formData);
     }
   };
-  const climateTypes = [
-    "Tropical",
-    "Arid",
-    "Temperate",
-    "Continental",
-    "Mediterranean",
-    "Monsoon",
-  ];
+  // Note: previously defined climateTypes were unused and removed to avoid lint errors.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
       <div className="container mx-auto max-w-4xl">
-        {/* Back Button */}
-        <button
-          onClick={onBack}
-          className="flex items-center text-green-700 hover:text-green-800 mb-6 text-lg font-medium transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6 mr-2" />
-          Back to Sign In
-        </button>
+        {/* Back Button and Language Dropdown */}
+        <div className="flex justify-between items-center mb-6">
+          <button
+            onClick={onBack}
+            className="flex items-center text-green-700 hover:text-green-800 text-lg font-medium transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6 mr-2" />
+            {t("farmDetails.backToSignIn")}
+          </button>
+          <LanguageDropdown />
+        </div>
 
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           <div className="bg-gradient-to-r from-green-600 to-green-700 p-6 text-center">
             <h2 className="text-3xl font-bold text-white mb-2">
-              Tell Us About Your Farm
+              {t("farmDetails.title")}
             </h2>
             <p className="text-green-100 text-lg">
-              Help us understand your farming conditions for personalized crop
-              recommendations
+              {t("farmDetails.subtitle")}
             </p>
           </div>
 
@@ -239,7 +250,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                 <label className="block text-xl font-semibold text-gray-800 mb-4">
                   <div className="flex items-center">
                     <Layers className="w-6 h-6 mr-2 text-green-600" />
-                    Select Your Soil Type
+                    {t("farmDetails.selectSoilType")}
                   </div>
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -267,11 +278,12 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                           className="w-5 h-5 text-green-600 mr-3"
                         />
                         <h3 className="font-semibold text-gray-800">
-                          {soil.name} Soil
+                          {t(`farmDetails.soilTypes.${soil.value}.name`)}{" "}
+                          {t("farmDetails.soil")}
                         </h3>
                       </div>
                       <p className="text-sm text-gray-600 ml-8">
-                        {soil.description}
+                        {t(`farmDetails.soilTypes.${soil.value}.description`)}
                       </p>
                     </div>
                   ))}
@@ -283,7 +295,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                 <label className="block text-xl font-semibold text-gray-800">
                   <div className="flex items-center">
                     <MapPin className="w-6 h-6 mr-2 text-green-600" />
-                    Farm Location
+                    {t("farmDetails.farmLocation")}
                   </div>
                 </label>
                 <div className="relative">
@@ -297,7 +309,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                     onBlur={() =>
                       setTimeout(() => setShowSuggestions(false), 200)
                     }
-                    placeholder="Enter city name (e.g., Mumbai, Delhi, Bangalore)"
+                    placeholder={t("farmDetails.locationPlaceholder")}
                     className="w-full p-4 text-lg border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                     required
                   />
@@ -330,7 +342,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                 {/* Popular Locations Quick Select */}
                 <div className="mt-2">
                   <p className="text-sm text-gray-600 mb-2">
-                    Popular agricultural regions:
+                    {t("farmDetails.popularRegions")}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {popularLocations.slice(0, 8).map((location) => (
@@ -353,32 +365,40 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                     <div className="flex items-center mb-2">
                       <CloudRain className="w-5 h-5 text-blue-600 mr-2" />
                       <span className="font-medium text-blue-800">
-                        Current Weather Conditions
+                        {t("farmDetails.currentWeather")}
                       </span>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
-                        <span className="text-gray-600">Temperature:</span>
+                        <span className="text-gray-600">
+                          {t("farmDetails.temperature")}:
+                        </span>
                         <div className="font-medium">
                           {weatherData.temperature}°C
                         </div>
                       </div>
                       <div>
-                        <span className="text-gray-600">Humidity:</span>
+                        <span className="text-gray-600">
+                          {t("farmDetails.humidity")}:
+                        </span>
                         <div className="font-medium">
                           {weatherData.humidity}%
                         </div>
                       </div>
                       <div>
-                        <span className="text-gray-600">Rainfall:</span>
+                        <span className="text-gray-600">
+                          {t("farmDetails.rainfall")}:
+                        </span>
                         <div className="font-medium">
                           {weatherData.rainfall || 0}mm
                         </div>
                       </div>
                       <div>
-                        <span className="text-gray-600">Conditions:</span>
+                        <span className="text-gray-600">
+                          {t("farmDetails.conditions")}:
+                        </span>
                         <div className="font-medium capitalize">
-                          {weatherData.description || "Clear"}
+                          {weatherData.description || t("farmDetails.clear")}
                         </div>
                       </div>
                     </div>
@@ -391,7 +411,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                 <label className="block text-xl font-semibold text-gray-800">
                   <div className="flex items-center">
                     <Calculator className="w-6 h-6 mr-2 text-green-600" />
-                    Farm Size
+                    {t("farmDetails.farmSize")}
                   </div>
                 </label>
                 <div className="flex items-center space-x-4">
@@ -403,7 +423,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                     onChange={(e) =>
                       setFormData({ ...formData, farmSize: e.target.value })
                     }
-                    placeholder="Enter size"
+                    placeholder={t("farmDetails.enterSize")}
                     className="flex-1 p-4 text-lg border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                     required
                   />
@@ -411,13 +431,15 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                     className="p-4 text-lg border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                     defaultValue="acres"
                   >
-                    <option value="acres">Acres</option>
-                    <option value="hectares">Hectares</option>
-                    <option value="bigha">Bigha</option>
+                    <option value="acres">{t("farmDetails.acres")}</option>
+                    <option value="hectares">
+                      {t("farmDetails.hectares")}
+                    </option>
+                    <option value="bigha">{t("farmDetails.bigha")}</option>
                   </select>
                 </div>
                 <p className="text-gray-600">
-                  Specify the total cultivable area of your farm
+                  {t("farmDetails.sizeDescription")}
                 </p>
               </div>
 
@@ -432,7 +454,7 @@ const FarmDetailsPage: React.FC<FarmDetailsPageProps> = ({
                   }
                   className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-8 rounded-xl text-xl font-semibold hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
                 >
-                  Get Crop Recommendations
+                  {t("farmDetails.getCropRecommendations")}
                 </button>
               </div>
             </div>

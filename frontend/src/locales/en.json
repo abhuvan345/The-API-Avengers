@@ -1,0 +1,235 @@
+{
+  "landing": {
+    "title": "AI-Powered Crop Diversification Advisor",
+    "subtitle": "Maximize your harvest potential with intelligent crop recommendations tailored to your soil, climate, and farming goals",
+    "smartPlanning": {
+      "title": "Smart Planning",
+      "description": "AI-driven crop selection based on your unique farm conditions"
+    },
+    "expertGuidance": {
+      "title": "Expert Guidance",
+      "description": "Professional insights from agricultural specialists"
+    },
+    "provenResults": {
+      "title": "Proven Results",
+      "description": "Increase yield and sustainability with data-driven decisions"
+    },
+    "teamTitle": "Meet Our Expert Team",
+    "getStarted": "GET STARTED",
+    "ctaSubtext": "Start your journey to better crops today!",
+    "teamMembers": {
+      "sarah": "Dr. Sarah Johnson",
+      "mike": "Mike Chen",
+      "emma": "Emma Rodriguez",
+      "david": "David Kumar"
+    },
+    "teamRoles": {
+      "agricultural": "Agricultural Scientist",
+      "aiEngineer": "AI Engineer",
+      "cropSpecialist": "Crop Specialist",
+      "sustainability": "Sustainability Expert"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Sign In",
+      "phone": "Phone / Email / Username",
+      "password": "Password",
+      "subtitle": "Sign in to continue your farming journey",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up",
+      "errors": {
+        "identifierRequired": "Phone, email, or username is required",
+        "passwordRequired": "Password is required"
+      },
+      "genericError": "Login failed",
+      "genericErrorRetry": "Login failed. Please try again."
+    },
+    "signUp": {
+      "title": "Create Account",
+      "username": "Username",
+      "phone": "Phone Number",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign In",
+      "errors": {
+        "phoneFormat": "Phone number must be exactly 10 digits",
+        "gmailFormat": "Please enter a valid Gmail address (@gmail.com)",
+        "usernameRequired": "Username is required",
+        "nameRequired": "Name is required",
+        "passwordFormat": "Password must be at least 8 characters with uppercase, lowercase, number, and special character"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Farm Dashboard",
+    "welcome": "Welcome back to your farming journey!",
+    "backToPlan": "Back to Plan",
+    "newPlan": "New Plan",
+    "quickActions": "Quick Actions",
+    "getCropRecommendations": "Get Crop Recommendations",
+    "viewFarmDetails": "View Farm Details",
+    "weatherToday": "Today's Weather",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "rainfall": "Rainfall",
+    "recentActivity": "Recent Activity",
+    "name": "Name",
+    "location": "Location",
+    "farmSize": "Farm Size",
+    "currentCrop": "Current Crop",
+    "none": "None",
+    "calendarTitle": "Farm Activity Calendar",
+    "calendarSubtitle": "Plan and track your daily farming activities",
+    "watering": "Watering",
+    "fertilizing": "Fertilizing",
+    "inspection": "Inspection",
+    "testing": "Testing",
+    "sun": "Sun",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "water": "Water",
+    "fertilize": "Fertilize",
+    "more": "more",
+    "activitiesFor": "Activities for",
+    "noActivities": "No activities scheduled for this day"
+  },
+  "farmDetails": {
+    "backToSignIn": "Back to Sign In",
+    "title": "Tell Us About Your Farm",
+    "subtitle": "Help us understand your farming conditions for personalized crop recommendations",
+    "selectSoilType": "Select Your Soil Type",
+    "soil": "Soil",
+    "soilTypes": {
+      "sandy": {
+        "name": "Sandy",
+        "description": "Well-draining, quick to warm up, low water retention"
+      },
+      "clay": {
+        "name": "Clay",
+        "description": "Heavy, nutrient-rich, slow drainage, retains water well"
+      },
+      "loamy": {
+        "name": "Loamy",
+        "description": "Perfect balance of sand, silt, and clay - ideal for most crops"
+      },
+      "silty": {
+        "name": "Silty",
+        "description": "Fine particles, good water retention, fertile"
+      },
+      "peaty": {
+        "name": "Peaty",
+        "description": "High organic matter, acidic, excellent water retention"
+      },
+      "chalky": {
+        "name": "Chalky",
+        "description": "Alkaline, free-draining, may need pH adjustment"
+      },
+      "saline": {
+        "name": "Saline",
+        "description": "High salt content, challenging for most crops"
+      },
+      "black_cotton": {
+        "name": "Black Cotton",
+        "description": "Rich in clay, swells when wet, cracks when dry"
+      }
+    },
+    "farmLocation": "Farm Location",
+    "locationPlaceholder": "Enter city name (e.g., Mumbai, Delhi, Bangalore)",
+    "popularRegions": "Popular agricultural regions:",
+    "currentWeather": "Current Weather Conditions",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "rainfall": "Rainfall",
+    "conditions": "Conditions",
+    "clear": "Clear",
+    "farmSize": "Farm Size",
+    "enterSize": "Enter size",
+    "acres": "Acres",
+    "hectares": "Hectares",
+    "bigha": "Bigha",
+    "sizeDescription": "Specify the total cultivable area of your farm",
+    "getCropRecommendations": "Get Crop Recommendations",
+    "soilType": "Soil Type",
+    "location": "Location",
+    "getRecommendations": "Get Crop Recommendations",
+    "weatherInfo": "Weather Information",
+    "soilHealth": "Soil Health Analysis",
+    "score": "Score",
+    "status": "Status",
+    "nitrogen": "Nitrogen (N)",
+    "phosphorus": "Phosphorus (P)",
+    "potassium": "Potassium (K)",
+    "pH": "pH Level",
+    "improvementTips": "Soil Improvement Tips"
+  },
+  "recommendations": {
+    "title": "Recommended Crops",
+    "loading": "Getting recommendations...",
+    "error": "Error getting recommendations",
+    "analyzing": "Analyzing Your Farm",
+    "aiGenerating": "AI is generating personalized crop recommendations...",
+    "unableToGetRecommendations": "Unable to Get Recommendations",
+    "tryAgain": "Try Again",
+    "noRecommendationsAvailable": "No Recommendations Available",
+    "unableToGenerateRecommendations": "Unable to generate recommendations for your farm conditions.",
+    "aiCropRecommendations": "AI Crop Recommendations",
+    "weather": "Weather",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "soilAnalysis": "Soil Analysis",
+    "topCropRecommendations": "Top Crop Recommendations for Your Farm",
+    "rank": "Rank",
+    "confidence": "Confidence",
+    "expectedIncome": "Expected Income",
+    "details": "Details",
+    "select": "Select",
+    "clickForPlan": "Click on any crop to see the detailed growing plan",
+    "perAcre": "per acre",
+    "plantingSuitability": "Planting Suitability",
+    "harvestDate": "Expected Harvest",
+    "waterRequirements": "Water Requirements",
+    "soilSuitability": "Soil Suitability",
+    "backToFarmDetails": "Back to Farm Details",
+    "viewCropPlan": "View Detailed Crop Plan"
+  },
+  "cropPlan": {
+    "title": "Crop Plan",
+    "growingStages": "Growing Stages",
+    "farmActivities": "Farm Activity Calendar",
+    "keyMilestones": "Key Milestones",
+    "currentStage": "Current Stage",
+    "daysRemaining": "Days Remaining",
+    "activities": "Activities",
+    "expectedYield": "Expected Yield",
+    "marketPrice": "Market Price",
+    "profitability": "Estimated Profitability"
+  },
+  "common": {
+    "language": "Language",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "good": "Good",
+    "moderate": "Moderate",
+    "poor": "Poor",
+    "excellent": "Excellent"
+  }
+}

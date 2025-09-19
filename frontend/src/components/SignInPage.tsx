@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ArrowLeft, Phone, Lock, Sprout, Eye, EyeOff } from "lucide-react";
 import authService from "../services/authService";
+import { useLanguage } from "../hooks/useLanguage";
+import LanguageDropdown from "./LanguageDropdown";
 
 interface SignInPageProps {
   onSuccess: (userData: {
@@ -19,6 +21,7 @@ const SignInPage: React.FC<SignInPageProps> = ({
   onBack,
   onSignUp,
 }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     identifier: "", // phone, email, or username
     password: "",
@@ -46,11 +49,11 @@ const SignInPage: React.FC<SignInPageProps> = ({
       const newErrors: { [key: string]: string } = {};
 
       if (!formData.identifier.trim()) {
-        newErrors.identifier = "Phone, email, or username is required";
+        newErrors.identifier = t("auth.signIn.errors.identifierRequired");
       }
 
       if (!formData.password.trim()) {
-        newErrors.password = "Password is required";
+        newErrors.password = t("auth.signIn.errors.passwordRequired");
       }
 
       if (Object.keys(newErrors).length > 0) {
@@ -68,14 +71,14 @@ const SignInPage: React.FC<SignInPageProps> = ({
       if (result.success) {
         onSuccess(result.user);
       } else {
-        setErrors({ general: result.error || "Login failed" });
+        setErrors({ general: result.error || t("auth.signIn.genericError") });
       }
     } catch (error) {
       setErrors({
         general:
           error instanceof Error
             ? error.message
-            : "Login failed. Please try again.",
+            : t("auth.signIn.genericErrorRetry"),
       });
     } finally {
       setLoading(false);
@@ -84,6 +87,11 @@ const SignInPage: React.FC<SignInPageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+      {/* Language Dropdown */}
+      <div className="absolute top-4 right-4 z-50">
+        <LanguageDropdown />
+      </div>
+
       <div className="w-full max-w-md">
         {/* Back Button */}
         <button
@@ -91,7 +99,7 @@ const SignInPage: React.FC<SignInPageProps> = ({
           className="flex items-center text-green-700 hover:text-green-800 mb-6 text-lg font-medium"
         >
           <ArrowLeft className="w-6 h-6 mr-2" />
-          Back
+          {t("common.back")}
         </button>
 
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
@@ -102,8 +110,10 @@ const SignInPage: React.FC<SignInPageProps> = ({
                 <Sprout className="w-8 h-8 text-green-600" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-            <p className="text-green-100">Sign in to your AgTech account</p>
+            <h2 className="text-3xl font-bold text-white mb-2">
+              {t("auth.signIn.title")}
+            </h2>
+            <p className="text-green-100">{t("auth.signIn.subtitle")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="p-8 space-y-6">
@@ -117,7 +127,7 @@ const SignInPage: React.FC<SignInPageProps> = ({
             {/* Phone/Email/Username Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Phone, Email, or Username
+                {t("auth.signIn.phone")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -132,7 +142,7 @@ const SignInPage: React.FC<SignInPageProps> = ({
                   className={`w-full pl-10 pr-4 py-3 border ${
                     errors.identifier ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
-                  placeholder="Enter phone, email, or username"
+                  placeholder={t("auth.signIn.phone")}
                   disabled={loading}
                 />
               </div>
@@ -144,7 +154,7 @@ const SignInPage: React.FC<SignInPageProps> = ({
             {/* Password Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Password
+                {t("auth.signIn.password")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -159,7 +169,7 @@ const SignInPage: React.FC<SignInPageProps> = ({
                   className={`w-full pl-10 pr-12 py-3 border ${
                     errors.password ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
-                  placeholder="Enter your password"
+                  placeholder={t("auth.signIn.password")}
                   disabled={loading}
                 />
                 <button
@@ -190,20 +200,20 @@ const SignInPage: React.FC<SignInPageProps> = ({
                   : "bg-green-600 hover:bg-green-700"
               }`}
             >
-              {loading ? "Signing In..." : "Sign In"}
+              {loading ? t("common.loading") : t("auth.signIn.submit")}
             </button>
 
             {/* Sign Up Link */}
             <div className="text-center">
               <p className="text-gray-600">
-                Don't have an account?{" "}
+                {t("auth.signIn.noAccount")}{" "}
                 <button
                   type="button"
                   onClick={onSignUp}
                   className="text-green-600 hover:text-green-700 font-semibold"
                   disabled={loading}
                 >
-                  Sign Up
+                  {t("auth.signIn.signUp")}
                 </button>
               </p>
             </div>

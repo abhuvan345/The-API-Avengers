@@ -1,0 +1,230 @@
+{
+  "landing": {
+    "title": "AI-संचालित फसल विविधीकरण सलाहकार",
+    "subtitle": "अपनी मिट्टी, जलवायु और खेती के लक्ष्यों के आधार पर बुद्धिमान फसल सिफारिशों के साथ अपनी फसल की क्षमता को अधिकतम करें",
+    "smartPlanning": {
+      "title": "स्मार्ट योजना",
+      "description": "आपकी कृषि परिस्थितियों पर आधारित AI-संचालित फसल चयन"
+    },
+    "expertGuidance": {
+      "title": "विशेषज्ञ मार्गदर्शन",
+      "description": "कृषि विशेषज्ञों से पेशेवर सुझाव"
+    },
+    "provenResults": {
+      "title": "सिद्ध परिणाम",
+      "description": "डेटा-आधारित निर्णयों से उत्पादन और स्थिरता में वृद्धि"
+    },
+    "teamTitle": "हमारी विशेषज्ञ टीम से मिलें",
+    "getStarted": "शुरू करें",
+    "ctaSubtext": "आज ही बेहतर फसलों की यात्रा शुरू करें!",
+    "teamMembers": {
+      "sarah": "डॉ. सारा जॉनसन",
+      "mike": "माइक चेन",
+      "emma": "एमा रोड्रिगेज",
+      "david": "डेविड कुमार"
+    },
+    "teamRoles": {
+      "agricultural": "कृषि वैज्ञानिक",
+      "aiEngineer": "AI इंजीनियर",
+      "cropSpecialist": "फसल विशेषज्ञ",
+      "sustainability": "स्थिरता विशेषज्ञ"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "साइन इन",
+      "phone": "फोन / ईमेल / उपयोगकर्ता नाम",
+      "password": "पासवर्ड",
+      "subtitle": "अपनी खेती की यात्रा जारी रखने के लिए साइन इन करें",
+      "submit": "साइन इन करें",
+      "noAccount": "खाता नहीं है?",
+      "signUp": "साइन अप करें",
+      "errors": {
+        "identifierRequired": "फोन, ईमेल, या उपयोगकर्ता नाम आवश्यक है",
+        "passwordRequired": "पासवर्ड आवश्यक है"
+      },
+      "genericError": "लॉगिन विफल",
+      "genericErrorRetry": "लॉगिन विफल। कृपया पुनः प्रयास करें।"
+    },
+    "signUp": {
+      "title": "खाता बनाएं",
+      "username": "उपयोगकर्ता नाम",
+      "phone": "फोन नंबर",
+      "password": "पासवर्ड",
+      "confirmPassword": "पासवर्ड की पुष्टि करें",
+      "submit": "खाता बनाएं",
+      "hasAccount": "पहले से खाता है?",
+      "signIn": "साइन इन करें",
+      "errors": {
+        "phoneFormat": "फोन नंबर ठीक 10 अंकों का होना चाहिए",
+        "gmailFormat": "कृपया एक मान्य Gmail पता दर्ज करें (@gmail.com)",
+        "usernameRequired": "उपयोगकर्ता नाम आवश्यक है",
+        "nameRequired": "नाम आवश्यक है",
+        "passwordFormat": "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए और उसमें बड़े अक्षर, छोटे अक्षर, संख्या और विशेष वर्ण शामिल हों"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "किसान डैशबोर्ड",
+    "welcome": "अपनी खेती की यात्रा में वापस स्वागत है!",
+    "backToPlan": "योजना पर वापस जाएं",
+    "newPlan": "नई योजना",
+    "name": "नाम",
+    "location": "स्थान",
+    "farmSize": "खेत का आकार",
+    "currentCrop": "वर्तमान फसल",
+    "none": "कोई नहीं",
+    "calendarTitle": "खेत गतिविधि कैलेंडर",
+    "calendarSubtitle": "अपनी दैनिक खेती गतिविधियों की योजना बनाएं और ट्रैक करें",
+    "watering": "सिंचाई",
+    "fertilizing": "उर्वरक",
+    "inspection": "निरीक्षण",
+    "testing": "परीक्षण",
+    "sun": "रवि",
+    "mon": "सोम",
+    "tue": "मंगल",
+    "wed": "बुध",
+    "thu": "गुरु",
+    "fri": "शुक्र",
+    "sat": "शनि",
+    "water": "पानी",
+    "fertilize": "उर्वरक",
+    "more": "और",
+    "activitiesFor": "गतिविधियां",
+    "temperature": "तापमान",
+    "humidity": "आर्द्रता",
+    "rainfall": "वर्षा",
+    "recentActivity": "हाल की गतिविधि"
+  },
+  "farmDetails": {
+    "backToSignIn": "साइन इन पर वापस जाएं",
+    "title": "हमें अपने खेत के बारे में बताएं",
+    "subtitle": "व्यक्तिगत फसल सिफारिशों के लिए अपनी खेती की स्थितियों को समझने में हमारी मदद करें",
+    "selectSoilType": "अपनी मिट्टी का प्रकार चुनें",
+    "soil": "मिट्टी",
+    "soilTypes": {
+      "sandy": {
+        "name": "बलुई",
+        "description": "अच्छी निकासी, जल्दी गर्म होने वाली, कम पानी बचाने वाली"
+      },
+      "clay": {
+        "name": "चिकनी",
+        "description": "भारी, पोषक तत्वों से भरपूर, धीमी निकासी, पानी अच्छी तरह से बचाने वाली"
+      },
+      "loamy": {
+        "name": "दोमट",
+        "description": "रेत, सिल्ट और मिट्टी का सही संतुलन - अधिकांश फसलों के लिए आदर्श"
+      },
+      "silty": {
+        "name": "सिल्टी",
+        "description": "महीन कण, अच्छी पानी बचाने की क्षमता, उपजाऊ"
+      },
+      "peaty": {
+        "name": "पीटी",
+        "description": "उच्च जैविक पदार्थ, अम्लीय, उत्कृष्ट पानी बचाने की क्षमता"
+      },
+      "chalky": {
+        "name": "चूनायुक्त",
+        "description": "क्षारीय, मुक्त निकासी, pH समायोजन की आवश्यकता हो सकती है"
+      },
+      "saline": {
+        "name": "लवणीय",
+        "description": "उच्च नमक सामग्री, अधिकांश फसलों के लिए चुनौतीपूर्ण"
+      },
+      "black_cotton": {
+        "name": "काली कपास",
+        "description": "मिट्टी में समृद्ध, गीला होने पर फूलता है, सूखने पर दरारें पड़ती हैं"
+      }
+    },
+    "farmLocation": "खेत का स्थान",
+    "locationPlaceholder": "शहर का नाम दर्ज करें (जैसे, मुंबई, दिल्ली, बैंगलोर)",
+    "popularRegions": "लोकप्रिय कृषि क्षेत्र:",
+    "currentWeather": "वर्तमान मौसम स्थितियां",
+    "temperature": "तापमान",
+    "humidity": "आर्द्रता",
+    "rainfall": "वर्षा",
+    "conditions": "स्थितियां",
+    "clear": "साफ",
+    "farmSize": "खेत का आकार",
+    "enterSize": "आकार दर्ज करें",
+    "acres": "एकड़",
+    "hectares": "हेक्टेयर",
+    "bigha": "बीघा",
+    "sizeDescription": "अपने खेत के कुल खेती योग्य क्षेत्र को निर्दिष्ट करें",
+    "getCropRecommendations": "फसल सिफारिशें प्राप्त करें",
+    "soilType": "मिट्टी का प्रकार",
+    "location": "स्थान",
+    "getRecommendations": "फसल सिफारिशें प्राप्त करें",
+    "weatherInfo": "मौसम की जानकारी",
+    "soilHealth": "मिट्टी स्वास्थ्य विश्लेषण",
+    "score": "स्कोर",
+    "status": "स्थिति",
+    "nitrogen": "नाइट्रोजन (N)",
+    "phosphorus": "फॉस्फोरस (P)",
+    "potassium": "पोटेशियम (K)",
+    "pH": "pH स्तर",
+    "improvementTips": "मिट्टी सुधार युक्तियाँ"
+  },
+  "recommendations": {
+    "title": "अनुशंसित फसलें",
+    "loading": "सिफारिशें मिल रही हैं...",
+    "error": "सिफारिशें प्राप्त करने में त्रुटि",
+    "analyzing": "आपके खेत का विश्लेषण कर रहे हैं",
+    "aiGenerating": "AI व्यक्तिगत फसल सिफारिशें तैयार कर रहा है...",
+    "unableToGetRecommendations": "सिफारिशें प्राप्त करने में असमर्थ",
+    "tryAgain": "फिर कोशिश करें",
+    "noRecommendationsAvailable": "कोई सिफारिशें उपलब्ध नहीं",
+    "unableToGenerateRecommendations": "आपकी खेती की स्थितियों के लिए सिफारिशें तैयार करने में असमर्थ।",
+    "aiCropRecommendations": "AI फसल सिफारिशें",
+    "weather": "मौसम",
+    "temperature": "तापमान",
+    "humidity": "आर्द्रता",
+    "soilAnalysis": "मिट्टी विश्लेषण",
+    "topCropRecommendations": "आपके खेत के लिए शीर्ष फसल सिफारिशें",
+    "rank": "रैंक",
+    "confidence": "विश्वास",
+    "expectedIncome": "अपेक्षित आय",
+    "details": "विवरण",
+    "select": "चुनें",
+    "clickForPlan": "विस्तृत बढ़ने की योजना देखने के लिए किसी भी फसल पर क्लिक करें",
+    "perAcre": "प्रति एकड़",
+    "plantingSuitability": "रोपण उपयुक्तता",
+    "harvestDate": "अपेक्षित फसल",
+    "waterRequirements": "पानी की आवश्यकताएं",
+    "soilSuitability": "मिट्टी की उपयुक्तता",
+    "backToFarmDetails": "खेत विवरण पर वापस जाएं",
+    "viewCropPlan": "विस्तृत फसल योजना देखें"
+  },
+  "cropPlan": {
+    "title": "फसल योजना",
+    "growingStages": "बढ़ते चरण",
+    "farmActivities": "खेत गतिविधि कैलेंडर",
+    "keyMilestones": "मुख्य मील के पत्थर",
+    "currentStage": "वर्तमान चरण",
+    "daysRemaining": "शेष दिन",
+    "activities": "गतिविधियां",
+    "expectedYield": "अपेक्षित उत्पादन",
+    "marketPrice": "बाजार मूल्य",
+    "profitability": "अनुमानित लाभप्रदता"
+  },
+  "common": {
+    "language": "भाषा",
+    "back": "वापस",
+    "next": "अगला",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "save": "सेव करें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "high": "उच्च",
+    "medium": "मध्यम",
+    "low": "कम",
+    "good": "अच्छा",
+    "moderate": "मध्यम",
+    "poor": "खराब",
+    "excellent": "उत्कृष्ट"
+  }
+}

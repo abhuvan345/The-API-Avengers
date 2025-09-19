@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import LandingPage from "./components/LandingPage";
 import SignInPage from "./components/SignInPage";
 import SignUpPage from "./components/SignUpPage";
@@ -6,7 +6,7 @@ import FarmDetailsPage from "./components/FarmDetailsPage";
 import RecommendedCropsPage from "./components/RecommendedCropsPage";
 import CropPlanPage from "./components/CropPlanPage";
 import Dashboard from "./components/Dashboard";
-import authService, { User } from "./services/authService";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 export type PageType =
   | "landing"
@@ -49,7 +49,12 @@ function App() {
     password: "",
     name: "John Farmer",
   });
-  const [selectedCrop, setSelectedCrop] = useState<any>(null);
+  const [selectedCrop, setSelectedCrop] = useState<{
+    name: string;
+    confidence: number;
+    expectedIncome: string;
+    rank: number;
+  } | null>(null);
 
   // Debug logging
   console.log("Current page:", currentPage);
@@ -129,9 +134,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      {renderCurrentPage()}
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+        {renderCurrentPage()}
+      </div>
+    </LanguageProvider>
   );
 }
 

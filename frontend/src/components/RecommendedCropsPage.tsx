@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import type { FarmData } from "../App";
 import authService from "../services/authService";
+import { useLanguage } from "../hooks/useLanguage";
+import LanguageDropdown from "./LanguageDropdown";
 
 interface CropSelectionData {
   name: string;
@@ -61,6 +63,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
   onCropSelect,
   onBack,
 }) => {
+  const { t } = useLanguage();
   const [recommendations, setRecommendations] = useState<ApiResponse | null>(
     null
   );
@@ -188,11 +191,9 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
         <div className="text-center">
           <Loader className="w-16 h-16 text-green-600 animate-spin mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Analyzing Your Farm
+            {t("recommendations.analyzing")}
           </h2>
-          <p className="text-gray-600">
-            AI is generating personalized crop recommendations...
-          </p>
+          <p className="text-gray-600">{t("recommendations.aiGenerating")}</p>
         </div>
       </div>
     );
@@ -213,14 +214,14 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
           <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
-              Unable to Get Recommendations
+              {t("recommendations.unableToGetRecommendations")}
             </h2>
             <p className="text-gray-600 mb-6">{error}</p>
             <button
               onClick={() => window.location.reload()}
               className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
             >
-              Try Again
+              {t("recommendations.tryAgain")}
             </button>
           </div>
         </div>
@@ -243,10 +244,10 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
           <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
             <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
-              No Recommendations Available
+              {t("recommendations.noRecommendationsAvailable")}
             </h2>
             <p className="text-gray-600">
-              Unable to generate recommendations for your farm conditions.
+              {t("recommendations.unableToGenerateRecommendations")}
             </p>
           </div>
         </div>
@@ -257,25 +258,30 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
       <div className="container mx-auto max-w-6xl">
-        {/* Back Button */}
-        <button
-          onClick={onBack}
-          className="flex items-center text-green-700 hover:text-green-800 mb-6 text-lg font-medium"
-        >
-          <ArrowLeft className="w-6 h-6 mr-2" />
-          Back to Farm Details
-        </button>
+        {/* Back Button and Language Dropdown */}
+        <div className="flex justify-between items-center mb-6">
+          <button
+            onClick={onBack}
+            className="flex items-center text-green-700 hover:text-green-800 text-lg font-medium"
+          >
+            <ArrowLeft className="w-6 h-6 mr-2" />
+            {t("recommendations.backToFarmDetails")}
+          </button>
+          <LanguageDropdown />
+        </div>
 
         {/* Header with Farm Analysis */}
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden mb-8">
           <div className="bg-gradient-to-r from-green-600 to-green-700 p-6">
             <h2 className="text-3xl font-bold text-white mb-2 text-center">
-              AI Crop Recommendations
+              {t("recommendations.aiCropRecommendations")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
               <div className="bg-white/10 rounded-xl p-4 text-center">
                 <CloudRain className="w-8 h-8 text-white mx-auto mb-2" />
-                <p className="text-green-100 text-sm">Weather</p>
+                <p className="text-green-100 text-sm">
+                  {t("recommendations.weather")}
+                </p>
                 <p className="text-white font-bold">
                   {recommendations.weather_data?.description || "N/A"}
                 </p>
@@ -285,17 +291,22 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
               </div>
               <div className="bg-white/10 rounded-xl p-4 text-center">
                 <ThermometerSun className="w-8 h-8 text-white mx-auto mb-2" />
-                <p className="text-green-100 text-sm">Temperature</p>
+                <p className="text-green-100 text-sm">
+                  {t("recommendations.temperature")}
+                </p>
                 <p className="text-white font-bold">
                   {recommendations.weather_data?.temperature}°C
                 </p>
                 <p className="text-green-200 text-sm">
-                  Humidity: {recommendations.weather_data?.humidity}%
+                  {t("recommendations.humidity")}:{" "}
+                  {recommendations.weather_data?.humidity}%
                 </p>
               </div>
               <div className="bg-white/10 rounded-xl p-4 text-center">
                 <Leaf className="w-8 h-8 text-white mx-auto mb-2" />
-                <p className="text-green-100 text-sm">Soil Analysis</p>
+                <p className="text-green-100 text-sm">
+                  {t("recommendations.soilAnalysis")}
+                </p>
                 <p className="text-white font-bold">
                   {recommendations.soil_analysis?.type}
                 </p>
@@ -311,7 +322,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           <div className="p-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-              Top Crop Recommendations for Your Farm
+              {t("recommendations.topCropRecommendations")}
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -335,7 +346,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
                             {crop.crop}
                           </h4>
                           <p className="text-sm text-gray-600">
-                            Rank #{crop.rank}
+                            {t("recommendations.rank")} #{crop.rank}
                           </p>
                         </div>
                       </div>
@@ -349,7 +360,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-sm text-gray-600">
-                          Confidence
+                          {t("recommendations.confidence")}
                         </span>
                         <span className="text-sm font-semibold">
                           {crop.confidence.toFixed(1)}%
@@ -367,7 +378,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
                       <div className="flex items-center mb-2">
                         <DollarSign className="w-4 h-4 text-green-600 mr-1" />
                         <span className="font-semibold text-gray-800">
-                          Expected Income
+                          {t("recommendations.expectedIncome")}
                         </span>
                       </div>
                       <p className="text-lg font-bold text-green-600">
@@ -384,7 +395,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
                         className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl transition-colors flex items-center justify-center text-sm"
                       >
                         <Info className="w-4 h-4 mr-1" />
-                        Details
+                        {t("recommendations.details")}
                       </button>
                       <button
                         onClick={(e) => {
@@ -394,7 +405,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
                         className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 rounded-xl transition-colors flex items-center justify-center text-sm"
                       >
                         <CheckCircle className="w-4 h-4 mr-1" />
-                        Select
+                        {t("recommendations.select")}
                       </button>
                     </div>
                   </div>
@@ -404,7 +415,7 @@ const RecommendedCropsPage: React.FC<RecommendedCropsPageProps> = ({
 
             <div className="text-center mt-8">
               <p className="text-gray-600 text-lg">
-                Click on any crop to see the detailed growing plan
+                {t("recommendations.clickForPlan")}
               </p>
             </div>
           </div>

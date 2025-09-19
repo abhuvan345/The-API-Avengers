@@ -14,6 +14,8 @@ import {
   Beaker,
 } from "lucide-react";
 import GrowingStagesTimeline from "./GrowingStagesTimeline";
+import { useLanguage } from "../hooks/useLanguage";
+import LanguageDropdown from "./LanguageDropdown";
 
 interface CropPlanPageProps {
   selectedCrop: {
@@ -59,6 +61,7 @@ const CropPlanPage: React.FC<CropPlanPageProps> = ({
   onNext,
   onBack,
 }) => {
+  const { t } = useLanguage();
   const [cropPlan, setCropPlan] = useState<CropPlan | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

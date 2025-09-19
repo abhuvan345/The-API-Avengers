@@ -1,6 +1,17 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Phone, Mail, User, Lock, Sprout, Eye, EyeOff } from 'lucide-react';
-import authService from '../services/authService';
+import React, { useState } from "react";
+import {
+  ArrowLeft,
+  Phone,
+  Mail,
+  User,
+  Lock,
+  Sprout,
+  Eye,
+  EyeOff,
+} from "lucide-react";
+import authService from "../services/authService";
+import { useLanguage } from "../hooks/useLanguage";
+import LanguageDropdown from "./LanguageDropdown";
 
 interface SignUpPageProps {
   onSuccess: () => void;
@@ -8,12 +19,13 @@ interface SignUpPageProps {
 }
 
 const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
-    phone: '',
-    gmail: '',
-    username: '',
-    password: '',
-    name: ''
+    phone: "",
+    gmail: "",
+    username: "",
+    password: "",
+    name: "",
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
@@ -30,16 +42,17 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
   };
 
   const validatePassword = (password: string): boolean => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
-    
+
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors({ ...errors, [field]: '' });
+      setErrors({ ...errors, [field]: "" });
     }
   };
 
@@ -53,23 +66,23 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
       const newErrors: { [key: string]: string } = {};
 
       if (!validatePhone(formData.phone)) {
-        newErrors.phone = 'Phone number must be exactly 10 digits';
+        newErrors.phone = t("auth.signUp.errors.phoneFormat");
       }
 
       if (!validateGmail(formData.gmail)) {
-        newErrors.gmail = 'Please enter a valid Gmail address (@gmail.com)';
+        newErrors.gmail = t("auth.signUp.errors.gmailFormat");
       }
 
       if (!formData.username.trim()) {
-        newErrors.username = 'Username is required';
+        newErrors.username = t("auth.signUp.errors.usernameRequired");
       }
 
       if (!formData.name.trim()) {
-        newErrors.name = 'Name is required';
+        newErrors.name = t("auth.signUp.errors.nameRequired");
       }
 
       if (!validatePassword(formData.password)) {
-        newErrors.password = 'Password must be at least 8 characters with uppercase, lowercase, number, and special character';
+        newErrors.password = t("auth.signUp.errors.passwordFormat");
       }
 
       if (Object.keys(newErrors).length > 0) {
@@ -84,17 +97,20 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
         gmail: formData.gmail,
         username: formData.username,
         password: formData.password,
-        name: formData.name
+        name: formData.name,
       });
 
       if (result.success) {
         onSuccess();
       } else {
-        setErrors({ general: result.error || 'Signup failed' });
+        setErrors({ general: result.error || "Signup failed" });
       }
     } catch (error) {
-      setErrors({ 
-        general: error instanceof Error ? error.message : 'Signup failed. Please try again.' 
+      setErrors({
+        general:
+          error instanceof Error
+            ? error.message
+            : "Signup failed. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -103,6 +119,11 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+      {/* Language Dropdown */}
+      <div className="absolute top-4 right-4 z-50">
+        <LanguageDropdown />
+      </div>
+
       <div className="w-full max-w-md">
         {/* Back Button */}
         <button
@@ -110,7 +131,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
           className="flex items-center text-green-700 hover:text-green-800 mb-6 text-lg font-medium"
         >
           <ArrowLeft className="w-6 h-6 mr-2" />
-          Back
+          {t("common.back")}
         </button>
 
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
@@ -121,8 +142,10 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
                 <Sprout className="w-8 h-8 text-green-600" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">Join AgTech</h2>
-            <p className="text-green-100">Create your farmer account</p>
+            <h2 className="text-3xl font-bold text-white mb-2">
+              {t("auth.signUp.title")}
+            </h2>
+            <p className="text-green-100">{t("auth.signUp.title")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
@@ -136,7 +159,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
             {/* Name Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Full Name
+                {t("auth.signUp.username")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -145,11 +168,11 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => handleInputChange('name', e.target.value)}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
                   className={`w-full pl-10 pr-4 py-3 border ${
-                    errors.name ? 'border-red-500' : 'border-gray-300'
+                    errors.name ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
-                  placeholder="Enter your full name"
+                  placeholder={t("auth.signUp.username")}
                   disabled={loading}
                 />
               </div>
@@ -161,7 +184,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
             {/* Phone Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Phone Number
+                {t("auth.signUp.phone")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -170,11 +193,16 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
                 <input
                   type="tel"
                   value={formData.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value.replace(/\D/g, '').slice(0, 10))}
+                  onChange={(e) =>
+                    handleInputChange(
+                      "phone",
+                      e.target.value.replace(/\D/g, "").slice(0, 10)
+                    )
+                  }
                   className={`w-full pl-10 pr-4 py-3 border ${
-                    errors.phone ? 'border-red-500' : 'border-gray-300'
+                    errors.phone ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
-                  placeholder="10-digit phone number"
+                  placeholder={t("auth.signUp.phone")}
                   disabled={loading}
                 />
               </div>
@@ -186,7 +214,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
             {/* Gmail Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Gmail Address
+                Email
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -195,9 +223,9 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
                 <input
                   type="email"
                   value={formData.gmail}
-                  onChange={(e) => handleInputChange('gmail', e.target.value)}
+                  onChange={(e) => handleInputChange("gmail", e.target.value)}
                   className={`w-full pl-10 pr-4 py-3 border ${
-                    errors.gmail ? 'border-red-500' : 'border-gray-300'
+                    errors.gmail ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
                   placeholder="your.email@gmail.com"
                   disabled={loading}
@@ -211,7 +239,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
             {/* Username Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Username
+                {t("auth.signUp.username")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -220,11 +248,13 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
                 <input
                   type="text"
                   value={formData.username}
-                  onChange={(e) => handleInputChange('username', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("username", e.target.value)
+                  }
                   className={`w-full pl-10 pr-4 py-3 border ${
-                    errors.username ? 'border-red-500' : 'border-gray-300'
+                    errors.username ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
-                  placeholder="Choose a username"
+                  placeholder={t("auth.signUp.username")}
                   disabled={loading}
                 />
               </div>
@@ -236,18 +266,20 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
             {/* Password Field */}
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Password
+                {t("auth.signUp.password")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
                   className={`w-full pl-10 pr-12 py-3 border ${
-                    errors.password ? 'border-red-500' : 'border-gray-300'
+                    errors.password ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent`}
                   placeholder="Create a strong password"
                   disabled={loading}
@@ -269,7 +301,8 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
                 <p className="mt-1 text-sm text-red-600">{errors.password}</p>
               )}
               <p className="mt-1 text-xs text-gray-500">
-                Must be 8+ characters with uppercase, lowercase, number & special character
+                Must be 8+ characters with uppercase, lowercase, number &
+                special character
               </p>
             </div>
 
@@ -279,11 +312,11 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onBack }) => {
               disabled={loading}
               className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition-colors ${
                 loading
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-green-600 hover:bg-green-700'
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-600 hover:bg-green-700"
               }`}
             >
-              {loading ? 'Creating Account...' : 'Create Account'}
+              {loading ? t("common.loading") : t("auth.signUp.submit")}
             </button>
           </form>
         </div>
